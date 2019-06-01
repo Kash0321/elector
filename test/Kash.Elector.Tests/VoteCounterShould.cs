@@ -5,6 +5,7 @@ using FluentAssertions;
 using Kash.Elector.Resources;
 using Moq;
 using Kash.Elector.Data;
+using System.Linq;
 
 namespace Kash.Elector.Tests
 {
@@ -51,13 +52,38 @@ namespace Kash.Elector.Tests
             return lists;
         }
 
+        IDictionary<Elector, (Elector Elector, ElectoralList ElectoralList)> votes = new Dictionary<Elector, (Elector Elector, ElectoralList ElectoralList)>();
+        Mock<IVoteRepository> voteRepositoryMock = null;
+        Mock<IVoteRepository> PrepareVoteRepositoryMock()
+        {
+            if (voteRepositoryMock == null)
+            {
+                voteRepositoryMock = new Mock<IVoteRepository>();
+
+                voteRepositoryMock
+                    .Setup(m => m.SetVote(It.IsAny<Elector>(), It.IsAny<ElectoralList>()))
+                    .Callback<Elector, ElectoralList>((e, el) =>
+                    {
+                        votes.Add(e, (e, el));
+                    });
+
+                voteRepositoryMock
+                    .Setup(m => m.GetVotes(It.IsAny<ElectoralList>()))
+                    .Returns<ElectoralList>((el) =>
+                    {
+                        return votes.Values.Where(v => v.ElectoralList == el).Count();
+                    });
+            }
+
+            return voteRepositoryMock;
+        }
+
         [Test]
         public void CountVote()
         {
             //Arrange
             var elector = new Elector("soyyo", "Kash", PrepareDistricts()[0]);
-            var voteRepository = new Mock<IVoteRepository>();
-            var target = new VoteCounter(voteRepository.Object);
+            var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
             var result = target.Vote(elector, PrepareLists()[0]);
@@ -72,16 +98,13 @@ namespace Kash.Elector.Tests
         {
             //Arrange
             var elector = new Elector("soyyo", "Kash", PrepareDistricts()[0]);
-            var list = new ElectoralList(PrepareElection(), "Partido Rojo", PrepareDistricts());
-            var voteRepository = new Mock<IVoteRepository>();
-            var target = new VoteCounter(voteRepository.Object);
+            var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
-
             Action action = () =>
             {
-                target.Vote(elector, list);
-                target.Vote(elector, list);
+                target.Vote(elector, PrepareLists()[0]);
+                target.Vote(elector, PrepareLists()[0]);
             };
 
             //Assert
