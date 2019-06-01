@@ -28,6 +28,7 @@ namespace Kash.Elector
 
             Election = election;
             Party = party;
+            Districts = new List<District>();
             foreach (var district in districts)
             {
                 Districts.Add(district);

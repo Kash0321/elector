@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Kash.Elector
+﻿namespace Kash.Elector
 {
     public interface IVoteCounter
     {
-        void Vote(Elector elector, ElectoralList list);
+        bool Vote(Elector elector, ElectoralList list);
 
-        Election Election { get; }
+        int GetVotes(ElectoralList list);
     }
 }

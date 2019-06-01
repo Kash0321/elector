@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kash.Elector", "src\Kash.Elector\Kash.Elector.csproj", "{CD6172A1-E7FE-4FD9-9F31-C4FD4AC511EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kash.Elector", "src\Kash.Elector\Kash.Elector.csproj", "{CD6172A1-E7FE-4FD9-9F31-C4FD4AC511EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kash.Elector.Tests", "test\Kash.Elector.Tests\Kash.Elector.Tests.csproj", "{8BB2DE7F-ED14-46D0-A1EE-770E30A673AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kash.CrossCutting", "src\Kash.CrossCutting\Kash.CrossCutting.csproj", "{D4CF2279-0527-4FAC-B2B6-6C7D66017366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kash.CrossCutting", "src\Kash.CrossCutting\Kash.CrossCutting.csproj", "{D4CF2279-0527-4FAC-B2B6-6C7D66017366}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kash.Elector.Tests", "test\Kash.Elector.Tests\Kash.Elector.Tests.csproj", "{44099075-B706-4782-95A6-D78B9DC83306}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{CD6172A1-E7FE-4FD9-9F31-C4FD4AC511EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD6172A1-E7FE-4FD9-9F31-C4FD4AC511EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD6172A1-E7FE-4FD9-9F31-C4FD4AC511EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BB2DE7F-ED14-46D0-A1EE-770E30A673AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BB2DE7F-ED14-46D0-A1EE-770E30A673AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BB2DE7F-ED14-46D0-A1EE-770E30A673AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BB2DE7F-ED14-46D0-A1EE-770E30A673AB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D4CF2279-0527-4FAC-B2B6-6C7D66017366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D4CF2279-0527-4FAC-B2B6-6C7D66017366}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4CF2279-0527-4FAC-B2B6-6C7D66017366}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4CF2279-0527-4FAC-B2B6-6C7D66017366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44099075-B706-4782-95A6-D78B9DC83306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44099075-B706-4782-95A6-D78B9DC83306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44099075-B706-4782-95A6-D78B9DC83306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44099075-B706-4782-95A6-D78B9DC83306}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
