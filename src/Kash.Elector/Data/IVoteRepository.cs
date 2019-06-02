@@ -6,10 +6,12 @@ namespace Kash.Elector.Data
 {
     public interface IVoteRepository
     {
-        void SetVote(Elector elector, ElectoralList list);
+        void AddOrUpdate(Elector elector, ElectoralList list);
 
-        bool HasVote(Elector elector, Election election);
+        ElectoralList Get(Elector elector, Election election);
 
-        int GetVotes(ElectoralList list);
+        void Remove(Elector elector, Election election);
+
+        int Count(ElectoralList list, District district);
     }
 }

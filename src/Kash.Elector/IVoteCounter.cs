@@ -4,6 +4,6 @@
     {
         bool Vote(Elector elector, ElectoralList list);
 
-        int GetVotes(ElectoralList list);
+        int CountVotes(ElectoralList list, District district);
     }
 }

@@ -11,14 +11,7 @@ namespace Kash.Elector
 
         public string Party { get; protected set; }
 
-        public int Votes { get; protected set; }
-
-        List<District> Districts { get; set; }
-
-        public IEnumerable<District> GetDistricts()
-        {
-            return Districts.ToArray();
-        }
+        public List<District> Districts { get; protected set; }
 
         public ElectoralList(Election election, string party, IEnumerable<District> districts)
         {
@@ -33,7 +26,11 @@ namespace Kash.Elector
             {
                 Districts.Add(district);
             }
-            Votes = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"{Election}, {Party}";
         }
     }
 }

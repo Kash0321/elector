@@ -1,5 +1,6 @@
 ﻿using Kash.CrossCutting.Diagnostics;
 using Kash.Elector.Data;
+using Kash.Elector.Resources;
 using System;
 
 namespace Kash.Elector
@@ -15,14 +16,26 @@ namespace Kash.Elector
             VoteRepository = voteRepository;
         }
 
-        public int GetVotes(ElectoralList list)
+        public int CountVotes(ElectoralList list, District district)
         {
-            return VoteRepository.GetVotes(list);
+            return VoteRepository.Count(list, district);
         }
 
         public bool Vote(Elector elector, ElectoralList list)
         {
-            VoteRepository.SetVote(elector, list);
+            var previousVote = VoteRepository.Get(elector, list.Election);
+
+            if (!(previousVote is null))
+            {
+                throw new ElectorException(Messages.DuplicatedVote);
+            }
+
+            if (!list.Districts.Contains(elector.District))
+            {
+                throw new ElectorException(Messages.OutOfDistrictVote);
+            }
+
+            VoteRepository.AddOrUpdate(elector, list);
 
             return true;
         }

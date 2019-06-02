@@ -120,4 +120,7 @@
   <data name="DuplicatedVote" xml:space="preserve">
     <value>Un elector no puede votar dos veces durante el mismo proceso electoral</value>
   </data>
+  <data name="OutOfDistrictVote" xml:space="preserve">
+    <value>Un elector solo puede votar listas electorales de su circunscripción</value>
+  </data>
 </root>

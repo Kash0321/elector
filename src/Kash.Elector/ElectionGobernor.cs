@@ -43,9 +43,9 @@ namespace Kash.Elector
             return ElectionResultsCalculator.GetResults();
         }
 
-        public int GetVotes(ElectoralList list)
+        public int CountVotes(ElectoralList list, District district)
         {
-            return VoteCounter.GetVotes(list);
+            return VoteCounter.CountVotes(list, district);
         }
     }
 }

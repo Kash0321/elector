@@ -68,5 +68,14 @@ namespace Kash.Elector.Resources {
                 return ResourceManager.GetString("DuplicatedVote", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Un elector solo puede votar listas electorales de su circunscripción.
+        /// </summary>
+        public static string OutOfDistrictVote {
+            get {
+                return ResourceManager.GetString("OutOfDistrictVote", resourceCulture);
+            }
+        }
     }
 }
