@@ -2,6 +2,7 @@
 using Kash.Elector.Data;
 using Kash.Elector.Resources;
 using System;
+using System.Collections.Generic;
 
 namespace Kash.Elector
 {
@@ -23,19 +24,20 @@ namespace Kash.Elector
 
         public bool Vote(Elector elector, ElectoralList list)
         {
-            var previousVote = VoteRepository.Get(elector, list.Election);
+            var previousVote = VoteRepository.Get(elector);
 
             if (!(previousVote is null))
             {
                 throw new ElectorException(Messages.DuplicatedVote);
             }
 
-            if (!list.Districts.Contains(elector.District))
+            var districtsList = new List<District>(list.Districts);
+            if (!districtsList.Contains(elector.District))
             {
                 throw new ElectorException(Messages.OutOfDistrictVote);
             }
 
-            VoteRepository.AddOrUpdate(elector, list);
+            VoteRepository.Add(elector, list);
 
             return true;
         }

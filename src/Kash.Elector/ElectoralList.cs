@@ -1,36 +1,34 @@
 ﻿using Kash.CrossCutting.Diagnostics;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Kash.Elector
 {
     public class ElectoralList
     {
-        public Election Election { get; protected set; }
-
         public string Party { get; protected set; }
 
-        public List<District> Districts { get; protected set; }
-
-        public ElectoralList(Election election, string party, IEnumerable<District> districts)
+        readonly IList<District> _districts = null;
+        public IReadOnlyList<District> Districts
         {
-            Check.NotNull(election, nameof(election));
+            get
+            {
+                return new ReadOnlyCollection<District>(_districts);
+            }
+        }
+
+        public ElectoralList(string party, IList<District> districts)
+        {
             Check.NotEmpty(party, nameof(party));
             Check.NotNull(districts, nameof(districts));
 
-            Election = election;
             Party = party;
-            Districts = new List<District>();
-            foreach (var district in districts)
-            {
-                Districts.Add(district);
-            }
+            _districts = districts;
         }
 
         public override string ToString()
         {
-            return $"{Election}, {Party}";
+            return $"{Party}";
         }
     }
 }

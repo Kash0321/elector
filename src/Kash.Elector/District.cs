@@ -11,12 +11,15 @@ namespace Kash.Elector
 
         public string Name { get; protected set; }
 
-        public District(int id, string name)
+        public int Seats { get; protected set; }
+
+        public District(int id, string name, int seats)
         {
             Check.NotEmpty(name, nameof(name));
 
             Id = id;
             Name = name;
+            Seats = seats;
         }
 
         public override string ToString()
