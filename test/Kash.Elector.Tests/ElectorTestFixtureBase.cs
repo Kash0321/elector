@@ -18,8 +18,8 @@ namespace Kash.Elector.Tests
                 districts = new Dictionary<string, District>()
                 {
                     { ZARAGOZA, new District(1, ZARAGOZA, 7) },
-                    { HUESCA, new District(1, HUESCA, 7) },
-                    { TERUEL, new District(1, TERUEL, 7) },
+                    { HUESCA, new District(2, HUESCA, 7) },
+                    { TERUEL, new District(3, TERUEL, 7) },
                 };
             }
 
