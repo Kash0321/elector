@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Kash.Elector.Data
 {
@@ -13,7 +14,9 @@ namespace Kash.Elector.Data
 
         Dictionary<int, Dictionary<int, District>> Districts { get; set; } = null;
 
-        public DummyDistrictRepository()
+        public int Delay { get; set; } = 0;
+
+        public DummyDistrictRepository(int delay)
         {
             Districts = new Dictionary<int, Dictionary<int, District>>()
             {
@@ -28,6 +31,34 @@ namespace Kash.Elector.Data
                     }
                 }
             };
+
+            Delay = delay;
+        }
+
+        bool Exists(Election election, int id)
+        {
+            var electionDistricts = InternalGetByElection(election);
+            var result = electionDistricts.TryGetValue(id, out _);
+
+            return result;
+        }
+
+        IDictionary<int, District> InternalGetByElection(Election election)
+        {
+            if (Districts.TryGetValue(election.Id, out Dictionary<int, District> result))
+            {
+                return result;
+            }
+
+            // Simulación de proceso pesado
+            Thread.Sleep(Delay);
+
+            return new Dictionary<int, District>();
+        }
+
+        bool Exists(Election election, District district)
+        {
+            return Exists(election, district.Id);
         }
 
         public void Add(Election election, District district)
@@ -65,33 +96,10 @@ namespace Kash.Elector.Data
             return result;
         }
 
-        IDictionary<int, District> InternalGetByElection(Election election)
-        {
-            if (Districts.TryGetValue(election.Id, out Dictionary<int, District> result))
-            {
-                return result;
-            }
-
-            return new Dictionary<int, District>();
-        }
-
         public IEnumerable<District> GetByElection(Election election)
         {
             var electionDistricts = InternalGetByElection(election);
             return electionDistricts.Values;
-        }
-
-        bool Exists(Election election, int id)
-        {
-            var electionDistricts = InternalGetByElection(election);
-            var result = electionDistricts.TryGetValue(id, out _);
-
-            return result;
-        }
-
-        bool Exists(Election election, District district)
-        {
-            return Exists(election, district.Id);
         }
 
         public void Remove(Election election, District district)
