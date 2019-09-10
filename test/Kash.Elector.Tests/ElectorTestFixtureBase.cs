@@ -11,15 +11,15 @@ namespace Kash.Elector.Tests
         protected const string MORDOR = "Mordor";
 
         Dictionary<string, District> districts = null;
-        protected Dictionary<string, District> PrepareDistricts()
+        protected Dictionary<string, District> PrepareDistricts(Election election)
         {
             if (districts == null)
             {
                 districts = new Dictionary<string, District>()
                 {
-                    { ZARAGOZA, new District(1, ZARAGOZA, 7) },
-                    { HUESCA, new District(2, HUESCA, 7) },
-                    { TERUEL, new District(3, TERUEL, 7) },
+                    { ZARAGOZA, new District(election, 1, ZARAGOZA, 7) },
+                    { HUESCA, new District(election, 2, HUESCA, 7) },
+                    { TERUEL, new District(election, 3, TERUEL, 7) },
                 };
             }
 
@@ -27,11 +27,11 @@ namespace Kash.Elector.Tests
         }
 
         District mordor = null;
-        protected District PrepareMordor()
+        protected District PrepareMordor(Election election)
         {
             if (mordor == null)
             {
-                mordor = new District(4, MORDOR, 999);
+                mordor = new District(election, 4, MORDOR, 999);
             }
             return mordor;
         }
@@ -41,7 +41,7 @@ namespace Kash.Elector.Tests
         {
             if (election == null)
             {
-                var districtsList = PrepareDistricts().Values.ToList();
+                var districtsList = PrepareDistricts(election).Values.ToList();
                 election = new Election(
                     1,
                     "Elecciones Generales 2019",
@@ -51,7 +51,7 @@ namespace Kash.Elector.Tests
                         new ElectoralList(PURPLE_PARTY, districtsList),
                         new ElectoralList(BLUE_PARTY, districtsList),
                         new ElectoralList(ORANGE_PARTY, districtsList),
-                        new ElectoralList(SAURON_PARTY, new List<District>() { PrepareMordor() })
+                        new ElectoralList(SAURON_PARTY, new List<District>() { PrepareMordor(election) })
                     }
                 );
             }

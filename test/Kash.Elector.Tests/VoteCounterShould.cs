@@ -14,9 +14,17 @@ namespace Kash.Elector.Tests
     [TestOf(typeof(VoteCounter))]
     public class VoteCounterShould : ElectorTestFixtureBase
     {
+        public Election Election { get; set; }
+
+        public VoteCounterShould()
+        {
+            Election = PrepareElection();
+        }
+
         List<(Elector Elector, ElectoralList ElectoralList)> votes =
             new List<(Elector Elector, ElectoralList ElectoralList)>();
         Mock<IVoteRepository> voteRepositoryMock = null;
+
         Mock<IVoteRepository> PrepareVoteRepositoryMock()
         {
             if (voteRepositoryMock == null)
@@ -62,7 +70,7 @@ namespace Kash.Elector.Tests
         public void CountOneVote()
         {
             //Arrange
-            var elector = new Elector("soyyo", PrepareDistricts()[ZARAGOZA]);
+            var elector = new Elector("soyyo", PrepareDistricts(Election)[ZARAGOZA]);
             var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
@@ -70,17 +78,17 @@ namespace Kash.Elector.Tests
 
             //Assert
             result.Should().BeTrue();
-            target.CountVotes(PrepareLists()[RED_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(1);
+            target.CountVotes(PrepareLists()[RED_PARTY], PrepareDistricts(Election)[ZARAGOZA]).Should().Be(1);
         }
 
         [Test]
         public void CountSomeVotesAtSameDistrict()
         {
             //Arrange
-            var elector1 = new Elector("soyyo1", PrepareDistricts()[ZARAGOZA]);
-            var elector2 = new Elector("soyyo2", PrepareDistricts()[ZARAGOZA]);
-            var elector3 = new Elector("soyyo3", PrepareDistricts()[ZARAGOZA]);
-            var elector4 = new Elector("soyyo4", PrepareDistricts()[ZARAGOZA]);
+            var elector1 = new Elector("soyyo1",PrepareDistricts(Election)[ZARAGOZA]);
+            var elector2 = new Elector("soyyo2",PrepareDistricts(Election)[ZARAGOZA]);
+            var elector3 = new Elector("soyyo3",PrepareDistricts(Election)[ZARAGOZA]);
+            var elector4 = new Elector("soyyo4",PrepareDistricts(Election)[ZARAGOZA]);
             var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
@@ -90,19 +98,19 @@ namespace Kash.Elector.Tests
             result = target.Vote(elector4, PrepareLists()[BLUE_PARTY]);
 
             //Assert
-            target.CountVotes(PrepareLists()[RED_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(2);
-            target.CountVotes(PrepareLists()[PURPLE_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(1);
-            target.CountVotes(PrepareLists()[BLUE_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(1);
+            target.CountVotes(PrepareLists()[RED_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(2);
+            target.CountVotes(PrepareLists()[PURPLE_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(1);
+            target.CountVotes(PrepareLists()[BLUE_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(1);
         }
 
         [Test]
         public void CountSomeVotesAtDifferentDistrict()
         {
             //Arrange
-            var elector1 = new Elector("soyyo1", PrepareDistricts()[ZARAGOZA]);
-            var elector2 = new Elector("soyyo2", PrepareDistricts()[ZARAGOZA]);
-            var elector3 = new Elector("soyyo3", PrepareDistricts()[ZARAGOZA]);
-            var elector4 = new Elector("soyyo4", PrepareMordor());
+            var elector1 = new Elector("soyyo1",PrepareDistricts(Election)[ZARAGOZA]);
+            var elector2 = new Elector("soyyo2",PrepareDistricts(Election)[ZARAGOZA]);
+            var elector3 = new Elector("soyyo3",PrepareDistricts(Election)[ZARAGOZA]);
+            var elector4 = new Elector("soyyo4",PrepareMordor(Election));
             var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
@@ -112,24 +120,24 @@ namespace Kash.Elector.Tests
             result = target.Vote(elector4, PrepareLists()[SAURON_PARTY]);
 
             //Assert
-            target.CountVotes(PrepareLists()[RED_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(2);
-            target.CountVotes(PrepareLists()[PURPLE_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(1);
-            target.CountVotes(PrepareLists()[BLUE_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(0);
-            target.CountVotes(PrepareLists()[ORANGE_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(0);
-            target.CountVotes(PrepareLists()[SAURON_PARTY], PrepareDistricts()[ZARAGOZA]).Should().Be(0);
+            target.CountVotes(PrepareLists()[RED_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(2);
+            target.CountVotes(PrepareLists()[PURPLE_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(1);
+            target.CountVotes(PrepareLists()[BLUE_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(0);
+            target.CountVotes(PrepareLists()[ORANGE_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(0);
+            target.CountVotes(PrepareLists()[SAURON_PARTY],PrepareDistricts(Election)[ZARAGOZA]).Should().Be(0);
 
-            target.CountVotes(PrepareLists()[RED_PARTY], PrepareMordor()).Should().Be(0);
-            target.CountVotes(PrepareLists()[PURPLE_PARTY], PrepareMordor()).Should().Be(0);
-            target.CountVotes(PrepareLists()[BLUE_PARTY], PrepareMordor()).Should().Be(0);
-            target.CountVotes(PrepareLists()[ORANGE_PARTY], PrepareMordor()).Should().Be(0);
-            target.CountVotes(PrepareLists()[SAURON_PARTY], PrepareMordor()).Should().Be(1);
+            target.CountVotes(PrepareLists()[RED_PARTY],PrepareMordor(Election)).Should().Be(0);
+            target.CountVotes(PrepareLists()[PURPLE_PARTY],PrepareMordor(Election)).Should().Be(0);
+            target.CountVotes(PrepareLists()[BLUE_PARTY],PrepareMordor(Election)).Should().Be(0);
+            target.CountVotes(PrepareLists()[ORANGE_PARTY],PrepareMordor(Election)).Should().Be(0);
+            target.CountVotes(PrepareLists()[SAURON_PARTY],PrepareMordor(Election)).Should().Be(1);
         }
 
         [Test]
         public void NotAllowDuplicatedVotes()
         {
             //Arrange
-            var elector = new Elector("soyyo", PrepareDistricts()[ZARAGOZA]);
+            var elector = new Elector("soyyo",PrepareDistricts(Election)[ZARAGOZA]);
             var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
@@ -147,7 +155,7 @@ namespace Kash.Elector.Tests
         public void NotAllowVoteListsFromOutOfYourDistrict()
         {
             //Arrange
-            var elector = new Elector("soyyo", PrepareDistricts()[ZARAGOZA]);
+            var elector = new Elector("soyyo",PrepareDistricts(Election)[ZARAGOZA]);
             var target = new VoteCounter(PrepareVoteRepositoryMock().Object);
 
             //Act
