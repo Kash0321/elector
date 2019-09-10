@@ -15,7 +15,7 @@ namespace Kash.Elector.Tests.Integration
         [TestCase(1000, 1, 1)]
         [TestCase(5, 2000, 2)]
         [TestCase(1000, 1, 2)]
-        public void SimulateVotingImpactWithoutCache(int votesCount, int delay, int repositoryMode)
+        public void SimulateVotingImpact(int votesCount, int delay, int repositoryMode)
         {
             var election = new Election(1, "Generales 2019", new List<ElectoralList> { });
             var districtRepositoryMode1 = new DummyDistrictRepository(election, delay);
