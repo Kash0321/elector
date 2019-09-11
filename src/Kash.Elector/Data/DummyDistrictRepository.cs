@@ -7,32 +7,14 @@ namespace Kash.Elector.Data
 {
     public class DummyDistrictRepository : IDistrictRepository
     {
-        const string ZARAGOZA = "Zaragoza";
-        const string HUESCA = "Huesca";
-        const string TERUEL = "Teruel";
-        const string MORDOR = "Mordor";
+        DummyDatabase Database { get; set; } // Nuestro almacenamiento "simulado"
 
-        Dictionary<int, Dictionary<int, District>> Districts { get; set; } = null;
-
-        public int Delay { get; set; } = 0;
+        public int Delay { get; set; } = 0; // Nuestra latencia o demora en la respuesta del servicio de almacenamiento
 
         public DummyDistrictRepository(Election election, int delay)
         {
-            Districts = new Dictionary<int, Dictionary<int, District>>()
-            {
-                {
-                    1, //Identificador de la elección
-                    new Dictionary<int,District>()
-                    {
-                        { 1, new District(election, 1, ZARAGOZA, 7) },
-                        { 2, new District(election, 2, HUESCA, 3) },
-                        { 3, new District(election, 3, TERUEL, 3) },
-                        { 4, new District(election, 4, MORDOR, 337) }
-                    }
-                }
-            };
-
             Delay = delay;
+            Database = new DummyDatabase(election);
         }
 
         bool Exists(Election election, int id)
@@ -48,7 +30,7 @@ namespace Kash.Elector.Data
             // Simulación de proceso pesado
             Thread.Sleep(Delay);
 
-            if (Districts.TryGetValue(election.Id, out Dictionary<int, District> result))
+            if (Database.Districts.TryGetValue(election.Id, out Dictionary<int, District> result))
             {
                 return result;
             }
