@@ -28,17 +28,17 @@ namespace Kash.Elector.Web
             //services.AddMemoryCache();
 
             // Redis
-            services.AddDistributedRedisCache(options =>
-            {
-                options.Configuration = Configuration[SECRET_NAME];
-                options.InstanceName = "RedisInstance";
-            });
+            //services.AddDistributedRedisCache(options =>
+            //{
+            //    options.Configuration = Configuration[SECRET_NAME];
+            //    options.InstanceName = "RedisInstance";
+            //});
 
-            //services.AddScoped<IDistrictRepository, DummyDistrictRepository>();
+            services.AddScoped<IDistrictRepository, DummyDistrictRepository>();
             //services.AddSingleton<IDistrictRepository, DummyDistrictRepositoryWithInnerStaticCache>();
-            services.AddScoped<IDistrictRepository, DummyDistrictRepositoryWithCache>();
+            //services.AddScoped<IDistrictRepository, DummyDistrictRepositoryWithCache>();
             //services.AddSingleton<ICacheManager, InMemoryCacheManager>();
-            services.AddScoped<ICacheManager, RedisCacheManager>();
+            //services.AddScoped<ICacheManager, RedisCacheManager>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
