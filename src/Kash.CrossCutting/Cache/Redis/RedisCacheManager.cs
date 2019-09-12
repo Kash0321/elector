@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cache.Examples.Infrasctructure.Cache.Redis
+namespace Kash.CrossCutting.Cache.Redis
 {
     public class RedisCacheManager : ICacheManager
     {

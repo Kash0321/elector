@@ -6,7 +6,7 @@ namespace Kash.Elector.Data
 {
     public class DummyDistrictRepositoryWithInnerStaticCache : DummyDistrictRepository
     {
-        public DummyDistrictRepositoryWithInnerStaticCache(Election election, int delay) : base(election, delay)
+        public DummyDistrictRepositoryWithInnerStaticCache() : base()
         {
             Cache = new Dictionary<int, Dictionary<int, District>>();
         }

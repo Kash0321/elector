@@ -1,5 +1,4 @@
-﻿using Cache.Examples.Infrasctructure.Cache;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Threading.Tasks;
 

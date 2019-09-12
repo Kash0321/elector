@@ -7,13 +7,14 @@ namespace Kash.Elector.Data
 {
     public class DummyDistrictRepository : IDistrictRepository
     {
+        public static readonly Election election = new Election(1, "Generales 2019", new List<ElectoralList> { });
+
         DummyDatabase Database { get; set; } // Nuestro almacenamiento "simulado"
 
-        public int Delay { get; set; } = 0; // Nuestra latencia o demora en la respuesta del servicio de almacenamiento
+        public static int Delay { get; set; } = 0; // Nuestra latencia o demora en la respuesta del servicio de almacenamiento
 
-        public DummyDistrictRepository(Election election, int delay)
+        public DummyDistrictRepository()
         {
-            Delay = delay;
             Database = new DummyDatabase(election);
         }
 

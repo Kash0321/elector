@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cache.Examples.Infrasctructure.Cache
+namespace Kash.CrossCutting.Cache
 {
     public interface ICacheManager
     {

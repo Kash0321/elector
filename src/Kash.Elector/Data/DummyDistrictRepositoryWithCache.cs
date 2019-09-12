@@ -1,7 +1,5 @@
-﻿using Cache.Examples.Infrasctructure.Cache;
-using System;
+﻿using Kash.CrossCutting.Cache;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Kash.Elector.Data
 {
@@ -9,7 +7,7 @@ namespace Kash.Elector.Data
     {
         public ICacheManager CacheManager { get; set; }
 
-        public DummyDistrictRepositoryWithCache(Election election, int delay, ICacheManager cacheManager) : base(election, delay)
+        public DummyDistrictRepositoryWithCache(ICacheManager cacheManager) : base()
         {
             CacheManager = cacheManager;
         }
