@@ -1,6 +1,7 @@
 ﻿using Kash.CrossCutting.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Kash.Elector
 {
@@ -8,7 +9,10 @@ namespace Kash.Elector
     {
         public int Id { get; protected set; }
 
+        [MaxLength(128)]
         public string Name { get; protected set; }
+
+        protected Election() { }
 
         public Election(int id, string name, IList<ElectoralList> electoralLists)
         {

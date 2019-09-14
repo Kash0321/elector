@@ -1,6 +1,7 @@
 ﻿using Kash.CrossCutting.Diagnostics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Kash.Elector
@@ -11,9 +12,12 @@ namespace Kash.Elector
 
         public int Id { get; protected set; }
 
+        [MaxLength(128)]
         public string Name { get; protected set; }
 
         public int Seats { get; protected set; }
+
+        protected District() { }
 
         public District(Election election, int id, string name, int seats)
         {
