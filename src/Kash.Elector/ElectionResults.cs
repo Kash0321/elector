@@ -26,7 +26,7 @@ namespace Kash.Elector
 
         public void AddResult(DistrictResults result)
         {
-            var districtsList = new List<District>(Election.Districts);
+            var districtsList = new List<District>(Election.GetDistricts());
             if (districtsList.Contains(result.District))
             {
                 _districtResults.Add(result);

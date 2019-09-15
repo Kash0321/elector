@@ -18,7 +18,11 @@ namespace Kash.Elector.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Seed();
+            modelBuilder.Entity<ElectoralList>()
+                .HasMany(p => p.Districts);
+
+            modelBuilder.Entity<District>()
+                .HasMany(p => p.ElectoralLists);
         }
     }
 }

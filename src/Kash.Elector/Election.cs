@@ -36,21 +36,15 @@ namespace Kash.Elector
         }
 
         readonly IList<District> _districts = null;
-        public IReadOnlyList<District> Districts
+        public IReadOnlyList<District> GetDistricts()
         {
-            get
-            {
-                return new ReadOnlyCollection<District>(_districts);
-            }
+            return new ReadOnlyCollection<District>(_districts is null ? new List<District>() : _districts);
         }
 
         readonly IList<ElectoralList> _electoralLists = null;
-        public IReadOnlyList<ElectoralList> ElectoralLists
+        public IReadOnlyList<ElectoralList> GetElectoralLists()
         {
-            get
-            {
-                return new ReadOnlyCollection<ElectoralList>(_electoralLists);
-            }
+            return new ReadOnlyCollection<ElectoralList>(_electoralLists is null ? new List<ElectoralList>() : _electoralLists);
         }
 
         public override string ToString()

@@ -22,7 +22,7 @@ namespace Kash.Elector.Web.IntegrationTests.Specs
         public async Task SimulateVotingiImpact()
         {
             //Arrange
-            DummyDistrictRepository.Delay = 2000;
+            DummyDistrictRepository.Delay = 0;
             var votesToDo = 10;
             var client = Factory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true });
 

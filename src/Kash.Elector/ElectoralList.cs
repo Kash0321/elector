@@ -12,14 +12,7 @@ namespace Kash.Elector
         [MaxLength(128)]
         public string Party { get; protected set; }
 
-        readonly IList<District> _districts = null;
-        public IReadOnlyList<District> Districts
-        {
-            get
-            {
-                return new ReadOnlyCollection<District>(_districts);
-            }
-        }
+        public IList<District> Districts { get; set; }
 
         protected ElectoralList() { }
 
@@ -29,7 +22,7 @@ namespace Kash.Elector
             Check.NotNull(districts, nameof(districts));
 
             Party = party;
-            _districts = districts;
+            Districts = districts;
         }
 
         public override string ToString()

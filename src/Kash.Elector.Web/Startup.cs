@@ -44,7 +44,7 @@ namespace Kash.Elector.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=electorDB;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<ElectorContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<ElectorContext>(options => options.UseSqlServer(connection).EnableSensitiveDataLogging(true));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

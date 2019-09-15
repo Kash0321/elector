@@ -22,9 +22,9 @@ namespace Kash.Elector
         {
             var result = new ElectionResults(Election);
 
-            foreach (var district in Election.Districts)
+            foreach (var district in Election.GetDistricts())
             {
-                var districtElectoralLists = Election.ElectoralLists.Where(e => e.Districts.Any(d => d == district));
+                var districtElectoralLists = Election.GetElectoralLists().Where(e => e.Districts.Any(d => d == district));
                 var listResultsList = new List<ElectoralListResults>();
 
                 // Recuento de votos

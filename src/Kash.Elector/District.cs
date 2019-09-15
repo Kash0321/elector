@@ -17,6 +17,8 @@ namespace Kash.Elector
 
         public int Seats { get; protected set; }
 
+        public IList<ElectoralList> ElectoralLists { get; set; }
+
         protected District() { }
 
         public District(Election election, int id, string name, int seats)

@@ -67,7 +67,7 @@ namespace Kash.Elector.Tests
 
         protected Dictionary<string, ElectoralList> PrepareLists()
         {
-            var electoralListsList = new List<ElectoralList>(PrepareElection().ElectoralLists);
+            var electoralListsList = new List<ElectoralList>(PrepareElection().GetElectoralLists());
             return electoralListsList.ToDictionary(e => e.Party);
         }
 
