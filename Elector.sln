@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kash.Elector.Web.Integratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kash.Elector.Data.EF", "src\Kash.Elector.Data.EF\Kash.Elector.Data.EF.csproj", "{514C1B2C-F686-4AD7-AAF3-E2F7E85DAF11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kash.Elector.Data.CosmosDb", "src\Kash.Elector.Data.CosmosDb\Kash.Elector.Data.CosmosDb.csproj", "{F8A1E9B6-9F8E-453D-8536-9D82B3A4E88E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{514C1B2C-F686-4AD7-AAF3-E2F7E85DAF11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{514C1B2C-F686-4AD7-AAF3-E2F7E85DAF11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{514C1B2C-F686-4AD7-AAF3-E2F7E85DAF11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A1E9B6-9F8E-453D-8536-9D82B3A4E88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A1E9B6-9F8E-453D-8536-9D82B3A4E88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A1E9B6-9F8E-453D-8536-9D82B3A4E88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A1E9B6-9F8E-453D-8536-9D82B3A4E88E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
